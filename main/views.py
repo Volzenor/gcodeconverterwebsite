@@ -78,10 +78,11 @@ def loading(request):
 
                 if checked:
                     edges = img
-
+                    if len(edges.shape) > 2:
+                        edges = cv2.cvtColor(edges,cv2.COLOR_BGR2GRAY)
                 for idxY,y in enumerate(edges):
                     for idxX,x in enumerate(y):
-                        if x == 255:
+                        if x > 250:
                             listOfCoords.append({"order":0,"x":idxX,"y":len(img)-idxY})
 
                 #print(listOfCoords)
